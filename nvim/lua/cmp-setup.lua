@@ -1,7 +1,7 @@
 -- auto complete setup
 --
 
-local luasnip = require("luasnip")
+require("luasnip")
 local cmp = require("cmp")
 
 local has_words_before = function()

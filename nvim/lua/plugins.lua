@@ -176,7 +176,9 @@ require("lazy").setup({
     {
         "akinsho/toggleterm.nvim",
         version = "*",
-        opts = {}
+        opts = {
+            open_mapping = [[<c-\>]], -- or { [[<c-\>]], [[<c-¥>]] } if you also use a Japanese keyboard.
+        }
     },
     -- auto pair
 
@@ -187,8 +189,14 @@ require("lazy").setup({
         opts = {}
     },
 
-    -- debug
-    'puremourning/vimspector',
+    -- seesion
+    'tpope/vim-obsession',
+
+
     -- Highlight word
-    'RRethy/vim-illuminate'
+    'RRethy/vim-illuminate',
+
+    -- debug
+    'mfussenegger/nvim-dap',
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 })

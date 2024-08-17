@@ -134,3 +134,4 @@ export XDG_CONFIG_HOME=~/.config
 
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"

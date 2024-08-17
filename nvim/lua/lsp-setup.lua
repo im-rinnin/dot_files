@@ -30,13 +30,14 @@ local on_attach = function(client, bufnr)
     end
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    local bufopts = { noremap = true, silent = true, buffer = bufnr ,desc="lsp"}
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
     vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, bufopts)
+
     vim.keymap.set("n", "gwa", vim.lsp.buf.add_workspace_folder, bufopts)
     vim.keymap.set("n", "gwr", vim.lsp.buf.remove_workspace_folder, bufopts)
     vim.keymap.set("n", "gwl", function()
@@ -44,8 +45,8 @@ local on_attach = function(client, bufnr)
     end, bufopts)
     vim.keymap.set("n", "gtd", vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set("n", "grn", vim.lsp.buf.rename, bufopts)
-    vim.keymap.set("n", "gca", vim.lsp.buf.code_action, bufopts)
     vim.keymap.set("n", "gf", vim.lsp.buf.format, bufopts)
+
 end
 
 -- How to add a LSP for a specific language?
@@ -61,10 +62,10 @@ local lspconfig = require("lspconfig")
 
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'pylsp', 'lua_ls', 'rust_analyzer', 'clangd', 'jsonls', 'asm_lsp' },
+    ensure_installed = { 'pyright', 'lua_ls', 'rust_analyzer', 'clangd', 'jsonls', 'asm_lsp' },
 })
 
-lspconfig.pylsp.setup({
+lspconfig.pyright.setup({
     on_attach = on_attach,
 })
 
