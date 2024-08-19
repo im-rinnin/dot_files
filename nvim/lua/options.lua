@@ -79,3 +79,7 @@ vim.g.clipboard = {
     ["*"] = paste,
   },
 }
+
+-- auto read when windows focus change 
+vim.cmd("au FocusGained,BufEnter * :silent! !")
+

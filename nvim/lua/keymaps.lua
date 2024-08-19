@@ -34,7 +34,8 @@ vim.g.maplocalleader = ","
 vim.keymap.set('n', '<leader>ta', ":tabnew<CR>", {})
 
 -- nvimtree
-vim.keymap.set('n', '<leader>nt', ":NvimTreeToggle<CR>", {})
+vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", {})
+
 
 -- neogit
 vim.keymap.set('n', '<leader>ng', ":Neogit<CR>", {})
@@ -72,8 +73,6 @@ vim.keymap.set('n', '<leader>lsw', builtin.lsp_workspace_symbols, { desc = '[L]s
 vim.keymap.set('n', '<leader>ldd', builtin.lsp_dynamic_workspace_symbols, { desc = '[L]sp dynamic_workspace_symbols' })
 
 -- terminal
-vim.keymap.set("n", "<leader>te", [[<cmd>ToggleTerm<cr>]]) -- make the window biger vertically
---
 function _G.set_terminal_keymaps()
     local opts = { buffer = 0 }
     vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
@@ -85,6 +84,10 @@ function _G.set_terminal_keymaps()
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+
+--- diffview
+vim.keymap.set('n', '<leader>dv', ":DiffviewOpen<CR>", { desc = '[L]sp dynamic_workspace_symbols' })
 
 
 -- gitsigns

@@ -6,3 +6,5 @@ username = im-rinnin
 [commit]
 gpgsign = false
 
+[merge]
+	conflictStyle = diff3

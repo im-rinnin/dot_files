@@ -25,6 +25,7 @@ require("lazy").setup({
             "nvim-tree/nvim-web-devicons",
         },
     },
+    -- undo
 
     "simnalamburt/vim-mundo",
 
@@ -45,18 +46,7 @@ require("lazy").setup({
         opts = {},
     },
 
-    {
-        "lewis6991/gitsigns.nvim",
-        opts = {
-            signs = {
-                add = { text = "+" },
-                change = { text = "~" },
-                delete = { text = "_" },
-                topdelete = { text = "‾" },
-                changedelete = { text = "~" },
-            },
-        },
-    },
+
 
     --which key
     {
@@ -83,6 +73,29 @@ require("lazy").setup({
             "nvim-telescope/telescope.nvim", -- optional
         },
         config = true,
+    },
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {
+            signs = {
+                add = { text = "+" },
+                change = { text = "~" },
+                delete = { text = "_" },
+                topdelete = { text = "‾" },
+                changedelete = { text = "~" },
+            },
+        },
+    },
+    --- use :diffview
+    ---: diffviewfilehistory
+    "sindrets/diffview.nvim",
+
+    -- git blame
+    {
+        "f-person/git-blame.nvim",
+        opts = {
+            enabled = false
+        },
     },
 
     --------------------------------------------------------------------------------------- auto complete---------------------------------------------------------------------------------

@@ -11,12 +11,14 @@ alias vi=nvim
 
 alias gs="git status"
 alias gl="git log"
-alias gm="git add . && git commit -a -m"
+alias gma="git add . && git commit -a -m"
+alias gm="git commit -a -m"
 alias ga="git add -A"
 alias gh="git stash"
 alias gr="git reset HEAD~1"
 alias gc="git checkout"
 alias gcb="git checkout -b "
+alias gb="git branch "
 
 # If you come from bash you might have to change your $PATH.
 
