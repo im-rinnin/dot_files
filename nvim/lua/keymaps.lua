@@ -37,7 +37,7 @@ vim.g.maplocalleader = ","
 vim.keymap.set('n', '<leader>ta', ":tabnew<CR>", {})
 
 -- nvimtree
-vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", {})
+vim.keymap.set('n', '<M-n>', ":NvimTreeToggle<CR>", {})
 
 
 -- neogit
