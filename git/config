@@ -8,3 +8,5 @@ gpgsign = false
 
 [merge]
 	conflictStyle = diff3
+[core]
+	editor = vim
