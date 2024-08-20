@@ -2,6 +2,8 @@ vim.cmd("language en_US.UTF-8")
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
 vim.cmd("set clipboard+=unnamedplus")
+-- show line number in help file
+vim.cmd("autocmd FileType help setlocal number")
 -- vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.mouse = "a" -- allow the mouse to be used in Nvim
