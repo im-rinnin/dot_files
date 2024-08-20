@@ -1,3 +1,4 @@
+--- install lazy
 vim.g.vimspector_enable_mappings = "HUMAN"
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -12,11 +13,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- add plugin here
+-- add plugin here-----------
 require("lazy").setup({
     -- clolorscheme
     "sainnhe/gruvbox-material",
-
+    --- file exploer
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
@@ -26,26 +27,25 @@ require("lazy").setup({
         },
     },
     -- undo
-
     "simnalamburt/vim-mundo",
-
+    -- auto save
+    "pocco81/auto-save.nvim",
+    -- telescope
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" },
         event = "VimEnter",
     },
-    "pocco81/auto-save.nvim",
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-    },
-    -- use gc/gcc to comment line
+    -- use gcc/gbc to comment line
     {
         "numToStr/Comment.nvim",
         opts = {},
     },
-
+    --nvim-treesitter
+    {
+        "nvim-treesitter/nvim-treesitter",
+    },
 
 
     --which key
@@ -129,14 +129,23 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
 
     ---------------------------------------------------------------------------------------------------------------
+    -- dap
+    'mfussenegger/nvim-dap',
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+
 
 
     -- Highlight todo, notes, etc in comments
     {
         "folke/todo-comments.nvim",
-        event = "VimEnter",
+        -- TODO:
+        -- HACK::
+        -- TODO
         dependencies = { "nvim-lua/plenary.nvim" },
-        opts = { signs = false },
+        opts = {
+            -- remove ":" in KEYWORDS
+            pattern = [[\b(KEYWORDS)\b]], -- ripgrep regex
+        },
     },
 
     { -- Collection of various small independent plugins/modules
@@ -205,11 +214,8 @@ require("lazy").setup({
     -- seesion
     'tpope/vim-obsession',
 
-
-    -- Highlight word
+    -- Highlight word under cursor
+    -- alt-n/p jump to next position has same symbol under cursor
     'RRethy/vim-illuminate',
 
-    -- debug
-    'mfussenegger/nvim-dap',
-    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 })

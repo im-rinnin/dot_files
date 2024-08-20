@@ -1,9 +1,10 @@
 vim.cmd("language en_US.UTF-8")
 
 -- Hint: use `:h <option>` to figure out the meaning if needed
-vim.opt.clipboard = "unnamedplus" -- use system clipboard
+vim.cmd("    set clipboard+=unnamedplus")
+-- vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.mouse = "a"               -- allow the mouse to be used in Nvim
+vim.opt.mouse = "a" -- allow the mouse to be used in Nvim
 
 -- Tab
 vim.opt.tabstop = 4      -- number of visual spaces per TAB
@@ -59,27 +60,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 -- clipboard osc 52
-vim.o.clipboard = "unnamedplus"
+---vim.o.clipboard = "unnamedplus"
 
 local function paste()
-  return {
-    vim.fn.split(vim.fn.getreg(""), "\n"),
-    vim.fn.getregtype(""),
-  }
+    return {
+        vim.fn.split(vim.fn.getreg(""), "\n"),
+        vim.fn.getregtype(""),
+    }
 end
 
 vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-  },
-  paste = {
-    ["+"] = paste,
-    ["*"] = paste,
-  },
+    name = "OSC 52",
+    copy = {
+        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+    },
 }
 
--- auto read when windows focus change 
+-- auto read when windows focus change
 vim.cmd("au FocusGained,BufEnter * :silent! !")
-

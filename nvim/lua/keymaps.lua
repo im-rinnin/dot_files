@@ -7,6 +7,9 @@ local opts = {
 -----------------
 -- Normal mode --
 -----------------
+---
+-- quit
+vim.keymap.set('n', 'qq', ":quit<CR>", { desc = "[Q]uit current window" })
 
 -- Hint: see `:h vim.map.set()`
 -- Better window navigation
@@ -68,8 +71,8 @@ vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = '[G]it commits' 
 vim.keymap.set('n', '<leader>lr', builtin.lsp_references, { desc = '[L]sp references' })
 vim.keymap.set('n', '<leader>ld', builtin.lsp_definitions, { desc = '[L]sp definitions' })
 vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, { desc = '[L]sp implementations' })
-vim.keymap.set('n', '<leader>lsd', builtin.lsp_document_symbols, { desc = '[L]sp document Symbol' })
-vim.keymap.set('n', '<leader>lsw', builtin.lsp_workspace_symbols, { desc = '[L]sp _workspace_symbols' })
+vim.keymap.set('n', '<leader>lo', builtin.lsp_document_symbols, { desc = '[L]sp document Symbol' })
+vim.keymap.set('n', '<leader>lw', builtin.lsp_workspace_symbols, { desc = '[L]sp _workspace_symbols' })
 vim.keymap.set('n', '<leader>ldd', builtin.lsp_dynamic_workspace_symbols, { desc = '[L]sp dynamic_workspace_symbols' })
 
 -- terminal
@@ -87,7 +90,13 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 
 --- diffview
-vim.keymap.set('n', '<leader>dv', ":DiffviewOpen<CR>", { desc = '[L]sp dynamic_workspace_symbols' })
+vim.keymap.set('n', '<leader>vo', ":DiffviewOpen<CR>", { desc = '[D]iff view open' })
+vim.keymap.set('n', '<leader>vc', ":DiffviewClose<CR>", { desc = '[D]iff view close' })
+vim.keymap.set('n', '<leader>vh', ":DiffviewFileHistory<CR>", { desc = '[D]iff view file history close' })
+
+-- git blame
+vim.keymap.set('n', '<leader>bl', ":GitBlameToggle<CR>", { desc = 'git [B]lame current file' })
+
 
 
 -- gitsigns
@@ -138,6 +147,7 @@ require('gitsigns').setup {
     end
 
 }
+vim.keymap.set('n', '<T-p>', function() require('illuminate').goto_next_reference() end)
 
 -- dap
 dap = require('dap')

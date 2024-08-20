@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "gwl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    vim.keymap.set("n", "gtd", vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set("n", "<Leader>gtd", vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set("n", "grn", vim.lsp.buf.rename, bufopts)
     vim.keymap.set("n", "gf", vim.lsp.buf.format, bufopts)
 
