@@ -30,23 +30,24 @@ local on_attach = function(client, bufnr)
     end
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buffer = bufnr ,desc="lsp"}
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-    vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, bufopts)
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    local setDesc = function(desc, opts)
+        bufopts.desc = desc
+        return bufopts
+    end
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, setDesc("declaration", bufopts))
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, setDesc("definition", bufopts))
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, setDesc("references", bufopts))
+    vim.keymap.set("n", "gh", vim.lsp.buf.hover, setDesc("hover", bufopts))
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, setDesc("implementation", bufopts))
+    vim.keymap.set("n", "gn", vim.lsp.buf.signature_help, setDesc("signature_help", bufopts))
 
-    vim.keymap.set("n", "gwa", vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set("n", "gwr", vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set("n", "gwl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set("n", "<Leader>gtd", vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set("n", "grn", vim.lsp.buf.rename, bufopts)
-    vim.keymap.set("n", "gf", vim.lsp.buf.format, bufopts)
+    vim.keymap.set("n", "gsd", vim.lsp.buf.document_symbol, setDesc("document_symbol", bufopts))
+    vim.keymap.set("n", "gsw", vim.lsp.buf.workspace_symbol, setDesc("workspace_symbol", bufopts))
 
+    vim.keymap.set("n", "gtd", vim.lsp.buf.type_definition, setDesc("type_definition", bufopts))
+    vim.keymap.set("n", "grn", vim.lsp.buf.rename, setDesc("rename", bufopts))
+    vim.keymap.set("n", "gm", vim.lsp.buf.format, setDesc("format", bufopts))
 end
 
 -- How to add a LSP for a specific language?
@@ -62,7 +63,7 @@ local lspconfig = require("lspconfig")
 
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'pyright', 'lua_ls', 'rust_analyzer', 'clangd', 'jsonls', 'asm_lsp' },
+    ensure_installed = { 'pyright', 'lua_ls', 'rust_analyzer', 'clangd', 'jsonls', 'asm_lsp', 'marksman' },
 })
 
 lspconfig.pyright.setup({
@@ -109,5 +110,8 @@ lspconfig.jsonls.setup({
 
 
 lspconfig.asm_lsp.setup({
+    on_attach = on_attach,
+})
+lspconfig.marksman.setup({
     on_attach = on_attach,
 })

@@ -90,14 +90,6 @@ require("lazy").setup({
     ---: diffviewfilehistory
     "sindrets/diffview.nvim",
 
-    -- git blame
-    {
-        "f-person/git-blame.nvim",
-        opts = {
-            enabled = false
-        },
-    },
-
     --------------------------------------------------------------------------------------- auto complete---------------------------------------------------------------------------------
     -- Vscode-like pictograms
     {

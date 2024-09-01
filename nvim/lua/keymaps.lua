@@ -8,8 +8,12 @@ local opts = {
 -- Normal mode --
 -----------------
 ---
+-- set leader key
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 -- quit
 vim.keymap.set('n', 'qq', ":quit<CR>", { desc = "[Q]uit current window" })
+vim.keymap.set('n', 'qn', ":qa<CR>", { desc = "[Q]uit nvim" })
 
 -- Hint: see `:h vim.map.set()`
 -- Better window navigation
@@ -23,17 +27,9 @@ vim.keymap.set("n", "-", [[<cmd>vertical resize -2<cr>]])   -- make the window s
 vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
 
--- Resize with arrows
--- delta: 2 lines
-vim.keymap.set('n', '<C-Up>', ':resize -2<CR>', opts)
-vim.keymap.set('n', '<C-Down>', ':resize +2<CR>', opts)
-vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', opts)
-
--- set leader key
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
 
 
+--  tabnew
 vim.keymap.set('n', '<leader>ta', ":tabnew<CR>", {})
 
 -- nvimtree
@@ -47,13 +43,12 @@ vim.keymap.set('n', '<leader>md', ":MundoToggle<CR>", {})
 -- telescope start with <leader>f
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fl', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-vim.keymap.set('n', '<leader>gs', ":Telescope lsp_workspace_symbols query=", { desc = '[S]earch Symbol("." for repeat)' })
 vim.keymap.set('n', '<leader>f?', builtin.keymaps, { desc = '[S]earch Symbol("." for repeat)' })
 
 vim.keymap.set('n', '<leader>fch', builtin.command_history, { desc = '[C]command history' })
@@ -63,9 +58,9 @@ vim.keymap.set('n', '<leader>fs', builtin.search_history, { desc = '[S]earch his
 vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = '[J]ump list' })
 
 -- telescope git
-vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it status' })
-vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = '[G]it files' })
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = '[G]it commits' })
+vim.keymap.set('n', '<leader>fgs', builtin.git_status, { desc = '[G]it status' })
+vim.keymap.set('n', '<leader>fgf', builtin.git_files, { desc = '[G]it files' })
+vim.keymap.set('n', '<leader>fgc', builtin.git_commits, { desc = '[G]it commits' })
 
 -- telescope lsp
 vim.keymap.set('n', '<leader>lr', builtin.lsp_references, { desc = '[L]sp references' })
@@ -93,9 +88,6 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 vim.keymap.set('n', '<leader>vo', ":DiffviewOpen<CR>", { desc = '[D]iff view open' })
 vim.keymap.set('n', '<leader>vc', ":DiffviewClose<CR>", { desc = '[D]iff view close' })
 vim.keymap.set('n', '<leader>vh', ":DiffviewFileHistory<CR>", { desc = '[D]iff view file history close' })
-
--- git blame
-vim.keymap.set('n', '<leader>bl', ":GitBlameToggle<CR>", { desc = 'git [B]lame current file' })
 
 
 
@@ -128,19 +120,20 @@ require('gitsigns').setup {
         end)
 
         -- Actions
-        map('n', '<leader>hs', gitsigns.stage_hunk)
-        map('n', '<leader>hr', gitsigns.reset_hunk)
-        map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-        map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-        map('n', '<leader>hS', gitsigns.stage_buffer)
-        map('n', '<leader>hu', gitsigns.undo_stage_hunk)
-        map('n', '<leader>hR', gitsigns.reset_buffer)
-        map('n', '<leader>hp', gitsigns.preview_hunk)
-        map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end)
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-        map('n', '<leader>hd', gitsigns.diffthis)
-        map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
-        map('n', '<leader>td', gitsigns.toggle_deleted)
+        map('n', '<leader>hs', gitsigns.stage_hunk,{desc="stage_hunk"})
+        map('n', '<leader>hu', gitsigns.undo_stage_hunk,{desc="undo_stage_hunk"})
+        map('n', '<leader>hr', gitsigns.reset_hunk,{desc="reset_hunk"})
+        map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end,{desc=""})
+        map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end,{desc=""})
+        map('n', '<leader>hf', gitsigns.stage_buffer,{desc="stage_buffer"})
+        map('n', '<leader>hR', gitsigns.reset_buffer,{desc="reset_buffer"})
+        map('n', '<leader>hp', gitsigns.preview_hunk,{desc="preview_hunk"})
+        map('n', '<leader>hlb', function() gitsigns.blame_line { full = true } end,{desc="blame_line"})
+        map('n', '<leader>hb', gitsigns.blame ,{desc="blame"})
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame,{desc="toggle_current_line_blame"})
+        map('n', '<leader>hd', gitsigns.diffthis,{desc="diffthis"})
+        map('n', '<leader>hD', function() gitsigns.diffthis('~') end,{desc=""})
+        map('n', '<leader>td', gitsigns.toggle_deleted,{desc="toggle_deleted"})
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
